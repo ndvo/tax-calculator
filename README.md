@@ -25,5 +25,5 @@ Start a small server in the root folder of the application and visit the appropr
 Then visit http://localhost:5000
 
 ## Runnig the tests
-
-Visit http://localhost:5000/tests
+- Install dependencies: `npm install`
+- Visit http://localhost:5000/tests
