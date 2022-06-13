@@ -85,7 +85,6 @@ function setupUI(ui, receipt) {
     applyTaxes(receipt.parsedData)
     receipt.output = outputReceipt(receipt.parsedData)
     ui.output.innerHTML = receipt.output
-    console.log(ui.output, receipt)
   })
 }
 
