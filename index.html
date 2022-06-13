@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset=utf-8>
+  <title>Your Receipt</title>
+  <link rel="stylesheet" href="style.css"></style>
+  <script type="module" src="main.js"></script>
+</head>
+<body>
+  <main>
+    <section id="input-values">
+      <form id="receipt-data">
+        <p>Input the text data containing the purchased items with price and
+        quantity</p>
+        <div class="widget">
+          <label>Purchased items</label>
+          <textarea name="purchased-items" id="purchased-items"></textarea>
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+      <form id="categorization-data">
+        <p>Input the JSON categorization data. This data is used to
+        distinguish food, medical and book items. The initial value is
+        presented in the input field.</p>
+        <div class="widget">
+          <label>Categorization data</label>
+          <textarea name="categorization-data" id="categorization-data"></textarea>
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+    </section>
+    <section id="example-inputs">
+      <p>These example inputs are presented to ease testing.</p>
+      <pre>
+      2 book at 12.49
+      1 music CD at 14.99
+      1 chocolate bar at 0.85
+      1 imported box of chocolates at 10.00
+      1 imported bottle of perfume at 47.50
+      1 imported bottle of perfume at 27.99
+      1 bottle of perfume at 18.99
+      1 packet of headache pills at 9.75
+      3 imported boxes of chocolates at 11.25
+      </pre>
+    </section>
+    <article id="receipt">
+      <h1>Receipt</h1>
+      <output id="raw-output">
+      </output>
+    </article>
+  </main>
+</body>
+</html>

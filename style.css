@@ -1,0 +1,25 @@
+main {
+  display: grid;
+  grid-template:
+    "header header"
+    "left right"
+    "footer footer"
+    ;
+  max-width: 90ch;
+  margin: 0 auto;
+}
+main article h1 {
+  font-size: 1em
+}
+
+#input-values {
+  grid-area: "left"
+}
+
+#example-inputs {
+  grid-area: "right"
+}
+
+#receipt {
+  grid-area: "main"
+}
