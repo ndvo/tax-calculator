@@ -56,6 +56,18 @@ export function itemParser(input) {
     }
   }
 }
+
+/**
+  * Parses a multi line input
+  *
+  * @param {string} input - the complete multiline input
+  * @return {Array.<ReceiptItem>} a potentially empty array of ReceiptItem
+  */
+export function multilineParser(input) {
+  const splitted = input.split(/\r?\n/)
+  return splitted.map(itemParser).filter(i => !!i)
+}
+
 const UI = {
   form: document.querySelector('#receipt-data'),
   output: document.querySelector('#raw-output')
