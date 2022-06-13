@@ -1,0 +1,16 @@
+{
+  "name": "subscribe",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+  },
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {},
+  "dependencies": {
+    "chai": "^4.3.6",
+    "mocha": "^10.0.0"
+  }
+}
