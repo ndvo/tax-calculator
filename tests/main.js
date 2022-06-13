@@ -1,4 +1,4 @@
-import { itemParser } from '../main.js'
+import { itemParser } from '../parser.js'
 import { addCategorization, category } from '../categorization.js'
 import { salesTaxValue } from '../tax.js'
 
