@@ -12,6 +12,10 @@ main article h1 {
   font-size: 1em
 }
 
+textarea {
+  width: 100%
+}
+
 #input-values {
   grid-area: "left"
 }
