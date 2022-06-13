@@ -1,4 +1,5 @@
 import { itemParser } from '../main.js'
+import { addCategorization, category } from '../categorization.js'
 
 mocha.setup("bdd")
 
@@ -38,4 +39,63 @@ describe('Parsing', function() {
     }
   })
 })
+
+
+describe('Categorization', function() {
+
+  after(function() {
+    releaseConsole()
+  })
+
+  it('Should be able to store valid categories', function() {
+    const fakeConsole = captureConsole()
+    addCategorization(['wrong'])
+    addCategorization([{product: "tv", category: "medical"}])
+    expect(fakeConsole.errorCalls.length).to.equal(1)
+    expect(fakeConsole.errorCalls[0])
+      .to.equal('Error adding categories: wrong')
+  })
+
+  it('Should be able to categorize products based on full names', function() {
+    const categorization = [
+      {product: 'headache pills', category: 'medical', result: 'medical'},
+      {product: 'box of chocolates', category: 'food', result: 'food'},
+      {product: 'imported box of chocolates', result: 'food'},
+      {product: 'music CD', category: 'some other stuff'},
+      {product: 'book', category: 'book', result: 'book'},
+    ]
+    addCategorization(categorization)
+    for (let i of categorization) {
+      const product = {name: i.product}
+      expect(category(product)).to.equal(i.result)
+    }
+
+  })
+
+})
+
+const realConsole = {
+  error: console.error,
+  log: console.log
+}
+
+function captureConsole() {
+  const fakeConsole = {
+    logCalls: [],
+    errorCalls: []
+  }
+  console.error = function(args) {
+    fakeConsole.errorCalls.push(args)
+  }
+  console.log = function(args) {
+    fakeConsole.logCalls.push(args)
+  }
+  return fakeConsole
+}
+
+function releaseConsole() {
+  console.log = realConsole.log
+  console.error = realConsole.error
+}
+
 mocha.run()
