@@ -78,3 +78,15 @@ const Receipt = {
   parsedData: null,
   output: null
 }
+function setupUI(ui, receipt) {
+  ui.form.reset()
+  ui.form.addEventListener('submit', e => {
+    e.preventDefault()
+    const formData = new FormData(ui.form)
+    receipt.rawData = formData.get('purchased-items')
+    receipt.parsedData = multilineParser(receipt.rawData)
+    console.log(ui.output, receipt)
+  })
+}
+
+setupUI(UI, Receipt)
