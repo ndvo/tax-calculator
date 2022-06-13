@@ -56,3 +56,13 @@ export function itemParser(input) {
     }
   }
 }
+const UI = {
+  form: document.querySelector('#receipt-data'),
+  output: document.querySelector('#raw-output')
+}
+
+const Receipt = {
+  rawData: null,
+  parsedData: null,
+  output: null
+}
