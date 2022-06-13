@@ -1,3 +1,5 @@
+import { computeTax } from '/tax.js'
+
 /**
   * Basic types
   *
@@ -68,6 +70,20 @@ export function multilineParser(input) {
   return splitted.map(itemParser).filter(i => !!i)
 }
 
+/**
+  * Changes the Receipt in place adding the total with taxes
+  *
+  * @param {Array.<ReceiptItem>} receipt - the receipt to compute tax for
+  */
+export function applyTaxes(receipt) {
+  for (let i of receipt) {
+    const itemTax = computeTax(i)
+    i.totalTaxes = i.quantity * itemTax
+    i.totalPlusTaxes = (i.quantity * (i.product.price + itemTax))
+  }
+
+}
+
 const UI = {
   form: document.querySelector('#receipt-data'),
   output: document.querySelector('#raw-output')
@@ -85,6 +101,7 @@ function setupUI(ui, receipt) {
     const formData = new FormData(ui.form)
     receipt.rawData = formData.get('purchased-items')
     receipt.parsedData = multilineParser(receipt.rawData)
+    applyTaxes(receipt.parsedData)
     console.log(ui.output, receipt)
   })
 }
