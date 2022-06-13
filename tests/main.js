@@ -1,5 +1,6 @@
 import { itemParser } from '../main.js'
 import { addCategorization, category } from '../categorization.js'
+import { salesTaxValue } from '../tax.js'
 
 mocha.setup("bdd")
 
@@ -73,6 +74,22 @@ describe('Categorization', function() {
   })
 
 })
+
+describe('Tax rates', function() {
+
+  it("should compute the tax given the value and rate", function() {
+    const testCases = [
+      [100, 10, 10],
+      [555, 10, 55.5],
+      [7, 3.53, 0.25],
+      [6, 2.8, 0.20]
+    ]
+    for (let i of testCases) {
+      expect(salesTaxValue(i[0], i[1])).to.equal(i[2])
+    }
+  })
+})
+
 
 const realConsole = {
   error: console.error,
