@@ -60,6 +60,30 @@ export function itemParser(input) {
 }
 
 /**
+  * Creates the output for a receipt item
+  *
+  * @param {ReceiptItem} item - to construct the output for
+  * @return {string} the output for the item
+  */
+export function outputReceiptItem(item) {
+  return `${item.quantity} ${item.product.name}: ${item.totalPlusTaxes.toFixed(2)}`
+}
+
+/**
+  * Creates the output for a full receipt
+  *
+  * @param {Array.<ReceiptItem>} receipt - the receipt item to build the output
+  */
+export function outputReceipt(receipt) {
+  return `
+    ${receipt.map(outputReceiptItem).join('<br/>')}
+    <br/>
+    Sales Taxes: ${receipt.reduce((t, c) => t + c.totalTaxes, 0).toFixed(2)}
+    <br/>
+    Total: ${receipt.reduce((t, c) => t + c.totalPlusTaxes, 0).toFixed(2)}`
+}
+
+/**
   * Parses a multi line input
   *
   * @param {string} input - the complete multiline input
@@ -94,6 +118,7 @@ const Receipt = {
   parsedData: null,
   output: null
 }
+
 function setupUI(ui, receipt) {
   ui.form.reset()
   ui.form.addEventListener('submit', e => {
@@ -102,6 +127,8 @@ function setupUI(ui, receipt) {
     receipt.rawData = formData.get('purchased-items')
     receipt.parsedData = multilineParser(receipt.rawData)
     applyTaxes(receipt.parsedData)
+    receipt.output = outputReceipt(receipt.parsedData)
+    ui.output.innerHTML = receipt.output
     console.log(ui.output, receipt)
   })
 }
